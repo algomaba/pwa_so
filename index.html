@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>(OEP 2025 AGE)Cuestionario AGE – Informática Básica</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <style>
+    :root{--bg:#f4f6f8;--card:#ffffff;--text:#0f172a;--muted:#6b7280;--accent:#2563eb;--ok:#16a34a;--bad:#dc2626}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto;background:var(--bg);color:var(--text)}
+    .wrap{max-width:900px;margin:auto;padding:16px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+    h1{font-size:1.2rem;margin:0}
+    button{background:var(--accent);color:#fff;border:none;padding:8px 14px;border-radius:10px;font-weight:700}
+    button.ghost{background:#fff;color:var(--text);border:1px solid #d1d5db}
+    button:disabled{opacity:.5}
+    #timer{font-weight:800}
+    .card{background:var(--card);padding:14px;border-radius:14px;margin-top:14px}
+    .question{border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin-bottom:12px}
+    .question p{margin:0 0 8px;font-weight:700}
+    label{display:block;padding:6px 8px;border-radius:8px}
+    label.correct{background:rgba(22,163,74,.15);color:var(--ok)}
+    label.incorrect{background:rgba(220,38,38,.15);color:var(--bad)}
+  </style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Quiz AGE – Informática Básica</h1>
+  <div>
+    <span id="timer">30:00</span>
+    <button id="startBtn">Iniciar</button>
+    <button id="pauseBtn" class="ghost" disabled>Pausar</button>
+    <button id="submitBtn">Enviar</button>
+  </div>
+</header>
+
+<main class="card">
+  <form id="quiz"></form>
+  <div id="score"></div>
+</main>
+
+<div class="card">
+  <h3>Historial de intentos</h3>
+  <ul id="historyList"></ul>
+  <button id="clearHistory" class="ghost">Borrar historial</button>
+</div>
+</div>
+
+<script>
+/* ===== REGISTRO SERVICE WORKER ===== */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
+
+/* ===== PREGUNTAS (30) ===== */
+const questionBank = [
+ {q:"¿Qué es el hardware?",o:["Programas","Dispositivos físicos","Datos"],c:1},
+ {q:"¿Qué es el software?",o:["Componentes físicos","Programas","Periféricos"],c:1},
+ {q:"Unidad de almacenamiento:",o:["CPU","Disco duro","Monitor"],c:1},
+ {q:"Función del sistema operativo:",o:["Solo redes","Gestiona recursos","Aumenta RAM"],c:1},
+ {q:"Periférico de entrada:",o:["Impresora","Teclado","Monitor"],c:1},
+ {q:"Procesos simultáneos:",o:["Overclock","Multitarea","Fragmentación"],c:1},
+ {q:"Memoria volátil:",o:["ROM","RAM","SSD"],c:1},
+ {q:"Sistema de archivos Windows:",o:["EXT4","NTFS","ReiserFS"],c:1},
+ {q:"NO es un sistema operativo:",o:["Linux","Windows","UEFI"],c:2},
+ {q:"Ejecuta instrucciones:",o:["GPU","CPU","Fuente"],c:1},
+ {q:"Protege confidencialidad:",o:["Firewall","Cifrado","Proxy"],c:
